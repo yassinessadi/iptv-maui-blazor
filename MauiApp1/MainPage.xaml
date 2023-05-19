@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp1"
+             x:Class="MauiApp1.MainPage"
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:pages="clr-namespace:MauiApp1.Pages"
+             android:TabbedPage.ToolbarPlacement="Bottom"
+             android:TabbedPage.IsSwipePagingEnabled="False"
+             android:TabbedPage.IsSmoothScrollEnabled="True"
+            NavigationPage.HasNavigationBar="True">
+           <!--BackgroundColor="{DynamicResource PageBackgroundColor}"-->
+    <!--//x:Name="blazorWebView"-->
+    <ContentPage Title="Home" IconImageSource="live_tv_black.png">
+        <BlazorWebView HostPage="wwwroot/index.html">
+            <BlazorWebView.RootComponents>
+                <RootComponent Selector="#app" ComponentType="{x:Type pages:Index}" />
+            </BlazorWebView.RootComponents>
+        </BlazorWebView>
+    </ContentPage>
+
+    <ContentPage Title="Library" IconImageSource="library_add_black.png">
+        <BlazorWebView HostPage="wwwroot/index.html">
+            <BlazorWebView.RootComponents>
+                <!--<RootComponent Selector="#app" ComponentType="{x:Type local:Main}" />-->
+                <RootComponent Selector="#app" ComponentType="{x:Type pages:Counter}" />
+            </BlazorWebView.RootComponents>
+        </BlazorWebView>
+    </ContentPage>
+                
+    <!--<pages:LibraryPage Title="Library" IconImageSource="library_add_black.png"/>-->
+
+
+    <pages:SettingsPage Title="Settings" IconImageSource="settings_black.png"/>
+
+</TabbedPage>

@@ -1,0 +1,75 @@
+﻿@page "/"
+
+
+@if (!IsConnected)
+{
+    <ConnectionPrompt Loading="Loading" />
+}
+else
+{
+    <nav class="navbar fixed-top navbar-light bg-primary p-3">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" @bind="filterText" aria-label="Search" aria-describedby="button-addon2">
+            <button class="btn btn-primary" type="button" id="button-addon2" @onclick="Filter">
+                <img src="images/outline_search_black.png" height="22" width="22" />
+            </button>
+        </div>
+    </nav>
+
+    @if (entries == null || entries.Count == 0)
+    {
+        if (IsBusy)
+        {
+            <SurveyPrompt />
+        }
+    }
+    else
+    {
+        <table class="table caption-top mt-5 mb-1">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var entry in entries)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @if (!string.IsNullOrEmpty(entry.ImageUrl))
+                            {
+                                <img src="@entry.ImageUrl" width="37" height="37" class="rounded-circle" />
+                            }
+                            else
+                            {
+                                <img src="images/outline_image_not_supported_black.png" width="30" height="30" class="rounded-circle" />
+                                @*<span class="oi oi-image"></span>*@
+                            }
+                        </td>
+                        <td class="align-middle">@entry.Name</td>
+                        <td class="text-end align-middle">
+                            <button class="btn btn-outline-light" @onclick="()=>Get(entry)">
+                                <img src="images/outline_play_arrow_black.png" height="22" width="22"/>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center mb-2">
+            <button @onclick="LoadMoreAsync" class="btn btn-outline-light d-@Active">
+                <img src="images/outline_refresh_black.png" class="@Rotate" height="22" width="22" />
+            </button>
+        </div>
+    }
+
+}
+
+
+
+
+
+
+@*<SurveyPrompt Title="How is Blazor working for you?" entries="entries" />*@

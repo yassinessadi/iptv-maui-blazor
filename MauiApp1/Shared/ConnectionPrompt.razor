@@ -1,0 +1,16 @@
+﻿<div class="d-flex justify-content-center position-fixed w-100 h-100 align-items-center bg-white">
+    <div class="alert alert-danger" role="alert">
+        <span class="oi oi-wifi" aria-hidden="true"></span>
+        No Internt Conection.
+        <button type="button" class="btn-toolbar" @onclick="InvokeDataAsync">
+            <img src="images/outline_refresh_black.png" height="22" width="22" />
+        </button>
+    </div>
+</div>
+@code{
+    [Parameter] public Action Loading { get; set; }
+    private async Task InvokeDataAsync()
+    {
+        Loading.Invoke();
+    }
+}
